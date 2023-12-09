@@ -1,6 +1,5 @@
 from scrapy import Selector
 import urllib3
-import
 
 import pandas as pd
 from datetime import datetime
