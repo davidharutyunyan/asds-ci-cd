@@ -49,4 +49,5 @@ def foo(event,context):
                      parse_dates=['date'])
     print(df.dtypes)
     print(df['usd_buy'].mean())
+    print('new version')
     print(df.head(18))
