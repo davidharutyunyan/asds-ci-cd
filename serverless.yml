@@ -1,0 +1,31 @@
+service: aws-python-serverless-example
+
+frameworkVersion: '3'
+
+custom:
+  pythonRequirements:
+    layer: true
+    dockerizePip: true
+    slim: true
+
+provider:
+  name: aws
+  region: eu-central-1
+  runtime: python3.11
+
+functions:
+  func:
+    handler: lambda_function.foo
+    events:
+      - schedule: 'cron(0 0 ? * MON *)'
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
+      - arn:aws:lambda:eu-central-1:336392948345:layer:AWSSDKPandas-Python311:2
+
+package:
+  individually: true
+  exclude:
+    - "*/**"
+
+plugins:
+  - serverless-python-requirements
