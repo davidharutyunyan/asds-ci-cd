@@ -4,8 +4,8 @@ frameworkVersion: '3'
 
 custom:
   pythonRequirements:
+    pythonBin: 'python'
     layer: true
-    dockerizePip: true
     slim: true
 
 provider:
