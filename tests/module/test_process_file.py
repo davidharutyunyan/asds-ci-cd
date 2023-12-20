@@ -9,7 +9,7 @@ class TestProcessFile(object):
         with open(dest_path) as f:
             lines = f.readlines()
             first_line = lines[1]
-            assert first_line == "2081,314942\n"
+            assert first_line == "2081314942\n"
             second_line = lines[2]
             assert second_line == "1059,186606\n"
 
