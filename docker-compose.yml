@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  app:
+    build: ./app
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres  # Use the service name 'postgres' to connect
+      DB_NAME: testdb
+      DB_USER: testuser
+      DB_PASSWORD: password
+    ports:
+      - "5000:5000"
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
+    driver: bridge
