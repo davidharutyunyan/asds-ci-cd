@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  writer:
+    build:
+      context: ./writer
+    volumes:
+      - shared-data:/data
+    command: python writer.py
+
+  reader:
+    build:
+      context: ./reader
+    volumes:
+      - shared-data:/data
+    command: python reader.py
+
+volumes:
+  shared-data:
