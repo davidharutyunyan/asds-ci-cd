@@ -1,0 +1,31 @@
+service: aws-python-serverless-example
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  region: eu-central-1
+  runtime: python3.11
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:ListBucket
+        - s3:GetObject
+        - s3:PutObject
+      Resource:
+        - arn:aws:s3:::asds-test-bucket
+        - arn:aws:s3:::asds-test-bucket/*
+
+  ecr:
+    images:
+      scrap_image:
+        path: ./
+
+functions:
+  func:
+    image:
+      name: scrap_image
+      command:
+        - lambda_function.run
+    events:
+      - schedule: 'cron(0 0 ? * * *)'
