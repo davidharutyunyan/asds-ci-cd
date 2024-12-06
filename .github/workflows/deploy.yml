@@ -20,6 +20,8 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.11
+    - name: Create .serverless directory
+      run: mkdir -p ~/.serverless
     - name: Set up Serverless credentials
       run: echo "//app.serverless.com/${{ secrets.SLS_ACCESS_KEY }}" > ~/.serverless/credentials
     - name: serverless deploy
