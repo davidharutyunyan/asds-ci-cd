@@ -28,14 +28,16 @@ jobs:
     # Install Docker (required for Serverless Framework with Docker images)
     - name: Install Docker
       uses: docker/setup-buildx-action@v2
-
-    # Deploy using Serverless Framework
+    - name: Install Serverless
+      run: npm install -g serverless
     - name: serverless deploy
-      uses: serverless/github-action@v4
-      with:
-        args: deploy
+      run: |
+        serverless config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        serverless deploy --stage prod
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.NEW_AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.NEW_AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
         SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+        OPT_STAGE: prod
+
