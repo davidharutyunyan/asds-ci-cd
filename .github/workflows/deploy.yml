@@ -36,7 +36,7 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.NEW_AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.NEW_AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
         SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
         OPT_STAGE: prod
 
